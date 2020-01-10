@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+# 監視ツールからのhttpアクセスで起きるように、httpリクエストを返すページを用意
+# &は並列起動するため
+node app.js &
+
+# bot起動
+npm install
+export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+exec node_modules/.bin/hubot --name "meyasubakot" "$@"
